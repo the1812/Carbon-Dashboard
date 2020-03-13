@@ -8,7 +8,9 @@
   const { BootstrapVue, BootstrapVueIcons } = await import('bootstrap-vue')
   await import('echarts')
   const { default: VueECharts } = await import('vue-echarts')
+  const { default: westeros } = await import('./themes/westeros.json')
 
+  VueECharts.registerTheme('westeros', westeros)
   Vue.use(BootstrapVue)
   Vue.use(BootstrapVueIcons)
   Vue.use(VueRouter)

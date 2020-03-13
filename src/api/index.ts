@@ -13,7 +13,8 @@ export const enum ResponseCode {
 export const delay = (ms: number) => {
   return new Promise<void>(resolve => setTimeout(() => resolve(), ms))
 }
-export const mapDate = <T extends {}>(array: T[], prop: string) => {
+/** 后端Date转前端Date (数组) */
+export const mapDate = <T extends {}>(array: T[], prop: string): any => {
   return array.map(item => {
     const newItem = cloneDeep(item)
     const dateValue = get(item, prop) as string
@@ -21,10 +22,13 @@ export const mapDate = <T extends {}>(array: T[], prop: string) => {
     return newItem
   })
 }
-export const convertDate = <T extends {}>(item: T, prop: string) => {
+/** 后端Date转前端Date */
+export const convertDate = <T extends {}>(item: T, prop: string): any => {
   set(item, prop, new Date(get(item, prop) as string))
+  return item
 }
-export const formatDate = <T extends {}>(obj: T | T[]) => {
+/** 前端Date转后端Date */
+export const formatDate = <T extends {}>(obj: T): any => {
   const result = cloneDeep(obj)
   const format = (obj: any) => {
     for (const [key, value] of Object.entries(obj)) {

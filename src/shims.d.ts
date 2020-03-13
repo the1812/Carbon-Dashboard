@@ -3,7 +3,6 @@ declare module '*.vue' {
   export default Vue
 }
 declare module 'vue-echarts' {
-  import { VueConstructor } from 'vue'
-  const VueEChart: VueConstructor
+  const VueEChart: any
   export default VueEChart
 }

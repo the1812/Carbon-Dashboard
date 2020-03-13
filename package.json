@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode=production -o docs --devtool false",
-    "dev-build": "webpack --config webpack.config.js",
-    "watch": "webpack --watch --config webpack.config.js",
+    "build": "webpack --config webpack.prod.js",
+    "dev-build": "webpack --config webpack.dev.js",
+    "watch": "webpack --watch --config webpack.dev.js",
     "start": "webpack-dev-server --open"
   },
   "repository": {

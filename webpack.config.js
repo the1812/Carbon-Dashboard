@@ -19,14 +19,12 @@ const includePaths = [
   path.resolve(__dirname, 'node_modules/resize-detector'),
 ]
 module.exports = {
-  mode: 'development',
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.vue', '.json'],
     alias: {
       '@': path.resolve(__dirname, 'src/')
     }
   },
-  devtool: 'inline-source-map',
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -86,7 +84,7 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: '碳积分管理面板',
       meta: {

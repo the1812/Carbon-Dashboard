@@ -1,6 +1,6 @@
 import { BvToast } from 'bootstrap-vue'
 
-export const toastError = (toaster: BvToast ,message: string, title: string) => {
+export const toastError = (toaster: BvToast, message: string, title: string) => {
   toaster.toast(message, {
     title: title,
     autoHideDelay: 2000,
@@ -8,6 +8,7 @@ export const toastError = (toaster: BvToast ,message: string, title: string) => 
     toaster: 'b-toaster-bottom-center',
     append: true,
   })
+  console.error(`[${title}] ${message}`)
 }
 export const toastSuccess = (toaster: BvToast, message: string, title: string) => {
   toaster.toast(message, {
@@ -17,4 +18,5 @@ export const toastSuccess = (toaster: BvToast, message: string, title: string) =
     toaster: 'b-toaster-bottom-center',
     append: true,
   })
+  console.log(`[${title}] ${message}`)
 }

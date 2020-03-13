@@ -12,6 +12,7 @@ export const enum UserInfoQueryType {
   planet,
 }
 type Proportion = {
+  uid: number
   number: number
   proportion: number
 }
