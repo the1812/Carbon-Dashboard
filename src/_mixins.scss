@@ -8,3 +8,15 @@
   line-height: $line-height;
   max-height: #{$line * $line-height}em;
 }
+@mixin chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .echarts {
+    flex: 1 0 0;
+  }
+  .params {
+    flex: 0 0 0;
+  }
+}

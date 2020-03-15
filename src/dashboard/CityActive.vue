@@ -2,9 +2,12 @@
   <div class="city-active">
     <v-chart ref="chart" theme="westeros" :options="chart" autoresize />
     <b-row class="m-0 params justify-content-center">
-      <b-input-group class="mr-2 w-auto" prepend="时间单位">
-        <b-form-select v-model="dayType" :options="dayTypeOptions"></b-form-select>
+      <b-input-group class="mr-2 w-auto" prepend="日期">
+        <b-form-datepicker locale="zh-CN" v-model="day"></b-form-datepicker>
       </b-input-group>
+      <!-- <b-input-group class="mr-2 w-auto" prepend="时间单位">
+        <b-form-select v-model="dayType" :options="dayTypeOptions"></b-form-select>
+      </b-input-group> -->
       <b-input-group class="w-auto" prepend="对比数量">
         <b-form-spinbutton v-model="number" min="1" max="4"></b-form-spinbutton>
       </b-input-group>
@@ -25,7 +28,7 @@ export default {
   data() {
     return {
       cid: 1,
-      day: '2020/03/15 14:27:05',
+      day: '2020-03-17',
       dayType: DayType.hour,
       dayTypeOptions: [
         { value: DayType.hour, text: '小时' },
@@ -33,7 +36,7 @@ export default {
         { value: DayType.week, text: '周' },
         { value: DayType.year, text: '年' }
       ],
-      number: 4,
+      number: 3,
       chart: {
         title: {
           text: '城市人数活跃度'
@@ -52,10 +55,10 @@ export default {
     await this.loadChart()
   },
   computed: {
-    queryParam(): ActivePeopleQueryInfo {
+    queryParam() {
       return {
         cid: this.cid,
-        day: this.day,
+        day: this.day.replace(/-/g, '/') + ' 23:00:01',
         dayType: this.dayType,
         number: this.number
       }
@@ -69,10 +72,10 @@ export default {
   methods: {
     async loadChart() {
       try {
+        this.$refs.chart.clear()
         this.$refs.chart.showLoading()
-        const { cityList } = await getActivePeople(
-          this.queryParam as ActivePeopleQueryInfo
-        )
+        console.log(this.queryParam)
+        const { cityList } = await getActivePeople(this.queryParam)
         if (cityList.length > 0) {
           const numbers = [...cityList[0].activeNumberList].reverse()
           const groups = groupBy(numbers, it => {
@@ -117,17 +120,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../mixins";
 .city-active {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  .echarts {
-    flex: 1 0 0;
-  }
-  .params {
-    flex: 0 0 0;
-  }
+  @include chart-container();
 }
 </style>

@@ -105,6 +105,9 @@ export default {
     }
   },
   async mounted() {
+    if (!this.account.isLogin){
+      return
+    }
     try {
       const response = await getShoppings()
       this.items = response.shoppingList

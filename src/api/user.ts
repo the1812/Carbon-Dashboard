@@ -1,4 +1,4 @@
-import { config, ApiError, ResponseCode } from '.'
+import { config, ApiError, ResponseCode, axios, objectResponse, ApiResponse } from '.'
 
 
 export const enum UserInfoQueryType {
@@ -17,7 +17,6 @@ type Proportion = {
   proportion: number
 }
 export const getUserInfo = async (type: UserInfoQueryType): Promise<{
-  code: ResponseCode
   userProportion: {
     ageProportions?: ({ age: number } & Proportion)[]
     sexProportions?: ({ sex: string } & Proportion)[]
@@ -27,12 +26,19 @@ export const getUserInfo = async (type: UserInfoQueryType): Promise<{
     animalProportions?: ({ animalID: number } & Proportion)[]
     planetProportions?: ({ planetID: number } & Proportion)[]
   }
-}> => {
+} & ApiResponse> => {
   if (config.mockFail) {
     throw new ApiError('get user info error')
   }
+  if (config.mock) {
+    return {
+      status: ResponseCode.success,
+      userProportion: {}
+    }
+  }
+  const { status, object: userProportion } = objectResponse(await axios.post('user', { type }))
   return {
-    code: ResponseCode.success,
-    userProportion: {}
+    status,
+    userProportion
   }
 }

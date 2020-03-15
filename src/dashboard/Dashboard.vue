@@ -1,18 +1,25 @@
 <template>
   <div class="dashboard">
-    <city-active></city-active>
+    <template v-if="account.isLogin">
+      <city-active></city-active>
+      <user-props></user-props>
+      <user-time></user-time>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { checkLoginMixin } from '../account/account'
 import CityActive from './CityActive.vue'
-
+import UserProps from './UserProps.vue'
+import UserTime from './UserTime.vue'
 export default {
   mixins: [checkLoginMixin],
   components: {
     CityActive,
-  },
+    UserProps,
+    UserTime
+  }
 }
 </script>
 
@@ -21,12 +28,15 @@ export default {
   display: grid;
   height: 80vh;
   grid-template:
-    'city-active n1' 1fr
-    'n2 n3' 1fr/ 1fr 1fr;
+    'city-active user-props' 1fr
+    'city-lines user-time' 1fr/ 1fr 1fr;
   column-gap: 24px;
   row-gap: 24px;
-  .city-acitve {
-    grid-area: city-acitve;
+
+  @each $name in ('city-active', 'user-props', 'city-lines', 'user-time') {
+    .#{$name} {
+      grid-area: unquote($name);
+    }
   }
 }
 </style>
