@@ -7,7 +7,7 @@
       </b-input-group>
       <!-- <b-input-group class="mr-2 w-auto" prepend="时间单位">
         <b-form-select v-model="dayType" :options="dayTypeOptions"></b-form-select>
-      </b-input-group> -->
+      </b-input-group>-->
       <b-input-group class="w-auto" prepend="对比数量">
         <b-form-spinbutton v-model="number" min="1" max="4"></b-form-spinbutton>
       </b-input-group>
@@ -40,6 +40,10 @@ export default {
       chart: {
         title: {
           text: '城市人数活跃度'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a}: {c}',
         },
         legend: {
           right: 0,
@@ -121,7 +125,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../mixins";
+@import '../mixins';
 .city-active {
   @include chart-container();
 }

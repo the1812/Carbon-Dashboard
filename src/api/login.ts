@@ -1,4 +1,4 @@
-import { config, ResponseCode, ApiError, axios, delay, ApiResponse } from '.'
+import { config, ResponseCode, ApiError, axios, delay, ApiResponse, objectResponse } from '.'
 
 export const login = async (account: string, password: string): Promise<{
   uid: number
@@ -17,13 +17,12 @@ export const login = async (account: string, password: string): Promise<{
       avatar: '',
     }
   }
-  const response = await axios.post('ulogin', {
+  const { status, object: obj } = objectResponse(await axios.post('ulogin', {
     account,
     password,
-  })
-  const obj = response.data.object
+  }))
   return {
-    status: response.data.status,
+    status,
     uid: obj.suId,
     avatar: config.imageRoot + obj.avatar,
     username: obj.name,

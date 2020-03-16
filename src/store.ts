@@ -8,17 +8,26 @@ const notLoginAccount: Account = {
   avatar: '',
   uid: -1,
 }
+const getSavedAccount = () => {
+  const saved = localStorage.getItem('account')
+  if (saved !== null) {
+    return JSON.parse(saved) as Account
+  }
+  return clone(notLoginAccount)
+}
 export const store = new Vuex.Store({
   state: {
-    account: clone(notLoginAccount) as Account,
+    account: getSavedAccount(),
     notLoginModal: false,
   },
   mutations: {
     login(state, payload: Account) {
       state.account = payload
+      localStorage.setItem('account', JSON.stringify(state.account))
     },
     logout(state) {
       state.account = clone(notLoginAccount)
+      localStorage.removeItem('account')
     },
     showNotLoginModal(state) {
       state.notLoginModal = true

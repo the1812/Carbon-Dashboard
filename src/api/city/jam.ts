@@ -1,5 +1,6 @@
 import { DayType } from './day-type'
-import { config, ApiError, ResponseCode } from '..'
+import { config, ApiError, ResponseCode, ApiResponse, axios, mapDate } from '..'
+import { TrafficType } from './traffic'
 
 export interface Jam {
   tid: number
@@ -8,24 +9,31 @@ export interface Jam {
   startStationName: string
   endSid: number
   endStationName: string
-  day: Date
+  day: string
   jamIndex: number
 }
-export const getCityJams = async (city: number, day: Date, dayType: DayType): Promise<{
-  code: ResponseCode
-  day: Date,
+export interface CityJamQueryInfo {
+  cid: number
+  day: string
   dayType: DayType
   number: number
+  type: TrafficType
+}
+export const getCityJams = async (queryInfo: CityJamQueryInfo): Promise<{
   jamList: Jam[]
-}> => {
+} & ApiResponse> => {
   if (config.mockFail) {
     throw new ApiError('get city jams error')
   }
+  if (config.mock) {
+    return {
+      status: ResponseCode.success,
+      jamList: [],
+    }
+  }
+  const { data } = await axios.post('jam', queryInfo)
   return {
-    code: ResponseCode.success,
-    day: new Date(),
-    dayType: DayType.day,
-    number: 1,
-    jamList: [],
+    status: data.status,
+    jamList: data.jamList,
   }
 }

@@ -60,7 +60,7 @@ export const objectResponse = (response: AxiosResponse): {
 } => {
   return {
     status: response.data.status,
-    object: response.data.object,
+    object: response.data.object || response.data.obj,
   }
 }
 export interface ApiResponse {

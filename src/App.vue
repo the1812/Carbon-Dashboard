@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <div class="nav">
-      <b-navbar toggleable="lg" type="dark" variant="primary" sticky class="w-100">
+    <div class="nav sticky-top">
+      <b-navbar toggleable="lg" type="dark" variant="primary" class="w-100">
         <b-navbar-brand>
           <router-link class="navbar-brand" to="dashboard">
             <b-icon icon="columns" font-scale="1.5" class="mr-2"></b-icon>碳积分

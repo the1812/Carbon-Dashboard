@@ -21,6 +21,7 @@ export const enum DetailNumberType {
 export interface DetailNumber {
   sid: number
   name: string
+  day: Date
   type: DetailNumberType
   number: number
 }
