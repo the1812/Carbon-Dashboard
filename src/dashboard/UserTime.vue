@@ -46,8 +46,8 @@ export default {
       if (userProportion.useTimeProportions) {
         const groups = groupBy(userProportion.useTimeProportions, ({ useTime }) => {
           const date = new Date(useTime)
-          const seconds = Math.trunc(date.getSeconds() / 10) + '0'
-          return `${date.getHours()}:${date.getMinutes()}:${seconds}`
+          // const seconds = Math.trunc(date.getSeconds() / 10) + '0'
+          return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         })
         const pie = Object.assign(
           {

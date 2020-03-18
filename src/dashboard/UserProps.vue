@@ -52,13 +52,13 @@ export default {
         hoverOffset: 0,
         label: {
           fontSize: 11,
-          bleedMargin: 0,
-          alignTo: 'edge',
-          margin: 6
+          // bleedMargin: 0,
+          // alignTo: 'edge',
+          // margin: 6
         },
         labelLine: {
           length: 4,
-          length2: 4
+          length2: 6
         }
       }
       if (userProportion.ageProportions) {

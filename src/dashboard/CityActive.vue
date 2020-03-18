@@ -24,11 +24,13 @@ import {
   getActivePeople
 } from '@/api/city/active-people'
 import { toastError } from '../toast'
+const today = new Date()
+const threeDaysLater = new Date(Number(today) + 3 * 24 * 3600 * 1000)
 export default {
   data() {
     return {
       cid: 1,
-      day: '2020-03-17',
+      day: `${threeDaysLater.getFullYear()}-${threeDaysLater.getMonth() + 1}-${threeDaysLater.getDate()}`,
       dayType: DayType.hour,
       dayTypeOptions: [
         { value: DayType.hour, text: '小时' },
