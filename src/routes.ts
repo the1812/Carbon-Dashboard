@@ -3,6 +3,7 @@ import Dashboard from './dashboard/Dashboard.vue'
 import Review from './review/Review.vue'
 import Shop from './shop/Shop.vue'
 import Account from './account/Account.vue'
+import { store } from './store'
 
 export const routes: RouteConfig[] = [
   {
@@ -23,6 +24,11 @@ export const routes: RouteConfig[] = [
   },
   {
     path: '/',
-    redirect: '/account',
+    redirect() {
+      if (store.state.account.isLogin) {
+        return '/dashboard'
+      }
+      return '/account'
+    },
   }
 ]
