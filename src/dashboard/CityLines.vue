@@ -4,6 +4,9 @@
       <b-input-group class="w-auto mb-2 mt-4" prepend="选择城市">
         <b-form-select v-model="city" :options="cities"></b-form-select>
       </b-input-group>
+      <b-input-group class="w-auto mb-2" prepend="日期">
+        <b-form-datepicker locale="zh-CN" v-model="day"></b-form-datepicker>
+      </b-input-group>
       <b-input-group class="w-auto mb-2" prepend="选择线路">
         <b-dropdown :text="trafficName">
           <b-dropdown-group v-for="group of traffics" :key="group.name" :header="group.name">
@@ -15,7 +18,7 @@
           </b-dropdown-group>
         </b-dropdown>
       </b-input-group>
-      <b-input-group class="w-auto mb-4" prepend="选择站点">
+      <b-input-group class="w-auto mb-2" prepend="选择站点">
         <b-form-select v-model="station" :options="stations"></b-form-select>
       </b-input-group>
       <b-card-text>
