@@ -84,7 +84,7 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: '碳积分管理面板',
       meta: {
@@ -100,8 +100,8 @@ module.exports = {
         spinner.stop()
       }
     }),
-    new CopyPlugin([
-      { from: 'src/static', to: 'static' },
-    ]),
+    // new CopyPlugin([
+    //   { from: 'src/static', to: 'static' },
+    // ]),
   ]
 }
