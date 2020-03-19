@@ -24,12 +24,12 @@ import {
   getActivePeople
 } from '@/api/city/active-people'
 import { toastError } from '../toast'
+import { mapState } from 'vuex'
 const today = new Date()
 const threeDaysLater = new Date(Number(today) + 3 * 24 * 3600 * 1000)
 export default {
   data() {
     return {
-      cid: 1,
       day: `${threeDaysLater.getFullYear()}-${threeDaysLater.getMonth() + 1}-${threeDaysLater.getDate()}`,
       dayType: DayType.hour,
       dayTypeOptions: [
@@ -61,9 +61,10 @@ export default {
     await this.loadChart()
   },
   computed: {
+    ...mapState(['selectedCid']),
     queryParam() {
       return {
-        cid: this.cid,
+        cid: this.selectedCid,
         day: this.day.replace(/-/g, '/') + ' 23:00:01',
         dayType: this.dayType,
         number: this.number

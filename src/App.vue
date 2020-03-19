@@ -108,6 +108,9 @@ html * {
     -webkit-tap-highlight-color: transparent;
     transition: 0.2s ease-out;
   }
+  .main {
+    padding-bottom: 64px;
+  }
   .navbar-dark .navbar-nav .nav-link {
     display: flex;
     align-items: center;

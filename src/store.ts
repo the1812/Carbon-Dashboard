@@ -19,8 +19,12 @@ export const store = new Vuex.Store({
   state: {
     account: getSavedAccount(),
     notLoginModal: false,
+    selectedCid: 1,
   },
   mutations: {
+    updateCid(state, payload: number) {
+      state.selectedCid = payload
+    },
     login(state, payload: Account) {
       state.account = payload
       localStorage.setItem('account', JSON.stringify(state.account))

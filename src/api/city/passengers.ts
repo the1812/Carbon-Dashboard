@@ -1,5 +1,5 @@
 import { TrafficType } from './traffic'
-import { ResponseCode, config, ApiError } from '..'
+import { ResponseCode, config, ApiError, ApiResponse, axios, convertDate, mapDate } from '..'
 import { DayType } from './day-type'
 
 export interface PassengerQueryInfo {
@@ -14,40 +14,46 @@ export interface PassengerQueryInfo {
   dayType: DayType
   number: number
 }
-export const enum DetailNumberType {
-  up,
-  down
-}
 export interface DetailNumber {
   sid: number
   name: string
-  day: Date
-  type: DetailNumberType
-  number: number
+  day: string
+  on_number: number
+  off_number: number
 }
 export interface PassengerNumber {
   startTime: Date
   endTime: Date
   number: number
-  detailNumbers: DetailNumber[]
+  detailNumberList: DetailNumber[]
 }
 export const getPassengers = async (queryInfo: PassengerQueryInfo): Promise<{
-  code: ResponseCode
   tid: number
   name: string
   day: Date,
   dayType: DayType
   passengerNumberList: PassengerNumber[]
-}> => {
+} & ApiResponse> => {
   if (config.mockFail) {
     throw new ApiError('get passengers error')
   }
-  return {
-    code: ResponseCode.success,
-    tid: 1,
-    name: 'name 1',
-    day: new Date(),
-    dayType: DayType.day,
-    passengerNumberList: [],
+  if (config.mock) {
+    return {
+      status: ResponseCode.success,
+      tid: 1,
+      name: 'name 1',
+      day: new Date(),
+      dayType: DayType.day,
+      passengerNumberList: [],
+    }
   }
+  const { data } = await axios.post('passenger', queryInfo)
+  return convertDate({
+    status: data.status,
+    tid: data.tid,
+    name: data.name,
+    day: data.day,
+    dayType: data.dayType,
+    passengerNumberList: mapDate(mapDate(data.passengerNumberList, 'startTime'), 'endTime'),
+  }, 'day')
 }

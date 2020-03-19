@@ -14,7 +14,7 @@ export const delay = (ms: number) => {
   return new Promise<void>(resolve => setTimeout(() => resolve(), ms))
 }
 /** 后端Date转前端Date (数组) */
-export const mapDate = <T extends {}>(array: T[], prop: string): any => {
+export const mapDate = <T extends {}>(array: T[], prop: string): any[] => {
   return array.map(item => {
     const newItem = cloneDeep(item)
     const dateValue = get(item, prop) as string

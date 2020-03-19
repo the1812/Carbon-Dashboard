@@ -29,6 +29,7 @@ import { TrafficType } from '../api/city/traffic'
 import { getCityJams, Jam } from '../api/city/jam'
 import { groupBy, sortBy, uniqBy } from 'lodash'
 import { toastError } from '@/toast'
+import { mapState } from 'vuex'
 type DropdownOption<T = number> = {
   value: T
   text: string
@@ -38,7 +39,6 @@ const threeDaysLater = new Date(Number(today) + 3 * 24 * 3600 * 1000)
 export default {
   data() {
     return {
-      cid: 1,
       day: `${threeDaysLater.getFullYear()}-${threeDaysLater.getMonth() + 1}-${threeDaysLater.getDate()}`,
       dayType: DayType.hour,
       dayTypeOptions: [
@@ -76,9 +76,10 @@ export default {
     }
   },
   computed: {
+    ...mapState(['selectedCid']),
     queryParam() {
       return {
-        cid: this.cid,
+        cid: this.selectedCid,
         day: this.day.replace(/-/g, '/') + ' 23:00:01',
         dayType: this.dayType,
         number: this.number,
