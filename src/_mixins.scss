@@ -6,6 +6,7 @@
   -webkit-line-clamp: $line;
   -webkit-box-orient: vertical;
   line-height: $line-height;
+  height: #{$line * $line-height}em;
   max-height: #{$line * $line-height}em;
 }
 @mixin chart-container {

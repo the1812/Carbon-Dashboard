@@ -3,8 +3,9 @@ import { isPlainObject, cloneDeep, get, set } from 'lodash'
 export const config = {
   mock: false,
   mockFail: false,
-  host: 'http://119.3.150.77:8001/',
-  imageRoot: 'http://119.3.150.77:8080/carbon/image/',
+  host: 'http://101.200.176.243:8002',
+  // host: 'http://119.3.150.77:8001/',
+  imageRoot: '',
 }
 export const enum ResponseCode {
   success = 200,

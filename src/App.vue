@@ -19,6 +19,9 @@
             <router-link class="nav-link" to="shop">
               <b-icon icon="bucket-fill"></b-icon>商城
             </router-link>
+            <router-link class="nav-link" to="star">
+              <b-icon icon="gear-fill"></b-icon>参数配置
+            </router-link>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-button variant="primary" v-if="!account.isLogin" @click="login()">
